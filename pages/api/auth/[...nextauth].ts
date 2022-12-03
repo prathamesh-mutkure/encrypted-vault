@@ -23,11 +23,9 @@ export const authOptions: NextAuthOptions = {
             return user;
           }
 
-          console.log(user);
-
           return null;
         } catch (e: any) {
-          throw new Error(e.message || "Login Failed!");
+          throw new Error(e.message ?? "Login Failed!");
         }
       },
     }),

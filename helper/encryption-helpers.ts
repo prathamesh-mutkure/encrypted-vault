@@ -3,7 +3,7 @@ import * as crypto from "crypto";
 // Generate a new RSA key pair
 export const getKeys = () => {
   const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
-    modulusLength: 2048, // the length of the key in bits
+    modulusLength: 512, // the length of the key in bits
     publicKeyEncoding: {
       type: "spki", // the type of encoding used for the public key
       format: "pem", // the format of the key
