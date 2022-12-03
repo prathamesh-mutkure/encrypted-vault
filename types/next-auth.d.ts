@@ -10,6 +10,7 @@ declare module "next-auth" {
     name: string;
     username: string;
     publicKey: string;
+    privateKey?: string;
   }
 
   /**
@@ -30,6 +31,7 @@ declare module "next-auth/jwt" {
       name: string;
       username: string;
       publicKey: string;
+      privateKey?: string;
     };
   }
 }

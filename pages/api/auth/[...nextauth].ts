@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { getKeys } from "../../../helper/encryption-helpers";
 import { getDummyUser, User } from "../../../models/user-model";
 
 export const authOptions: NextAuthOptions = {
@@ -14,11 +15,15 @@ export const authOptions: NextAuthOptions = {
       credentials: {},
       authorize: async (credentials, req) => {
         try {
-          const user: User = getDummyUser();
+          const { privateKey, publicKey } = getKeys();
+
+          const user: User = getDummyUser(publicKey, privateKey);
 
           if (user !== null) {
             return user;
           }
+
+          console.log(user);
 
           return null;
         } catch (e: any) {
