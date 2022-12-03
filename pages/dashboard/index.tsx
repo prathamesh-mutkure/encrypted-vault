@@ -3,6 +3,8 @@ import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
 import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
+import Dashboard from "../../components/dashboard/dashboard";
+import DashboardNavBar from "../../components/dashboard/dashboard-nav";
 import { useAppDispatch } from "../../hooks";
 
 interface DashboardPageProps {
@@ -14,14 +16,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ error }) => {
   const dispatch = useAppDispatch();
   const loadingBarRef: React.Ref<LoadingBarRef> = useRef(null);
 
-  //   useEffect(() => {
-  //     if (!exams) {
-  //       return;
-  //     }
-
-  //     // dispatch(examActions.setAssignedExams(exams));
-  //   }, [dispatch, exams]);
-
   if (error) {
     return <p>{error}</p>;
   }
@@ -32,6 +26,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ error }) => {
         <title>Vault</title>
       </Head>
       <LoadingBar color="#ffffff" ref={loadingBarRef} />
+
+      <DashboardNavBar />
+
+      <Dashboard />
+
       {/* <NavBarDashboard loadingBarRef={loadingBarRef} />
       <Dashboard loadingBarRef={loadingBarRef} /> */}
 
