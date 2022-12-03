@@ -38,3 +38,6 @@ next-env.d.ts
 # Firebase
 firebase-config.ts
 .firebase/
+
+# Env
+.env
