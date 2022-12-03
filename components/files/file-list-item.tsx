@@ -16,6 +16,7 @@ import { Endpoints } from "../../constants/endpoints";
 interface FileListItemProps {
   filename: String;
   id: String;
+  url: string;
   onDelete: (id: String) => void;
   onRename: (id: String) => void;
 }
@@ -23,6 +24,7 @@ interface FileListItemProps {
 const FileListItem: React.FC<FileListItemProps> = ({
   filename,
   id,
+  url,
   onDelete,
   onRename,
 }) => {
@@ -65,9 +67,7 @@ const FileListItem: React.FC<FileListItemProps> = ({
       }
     >
       <ListItemAvatar>
-        <Avatar>
-          <FolderIcon />
-        </Avatar>
+        <Avatar src={url} />
       </ListItemAvatar>
       <ListItemText primary={filename} />
     </ListItem>

@@ -3,6 +3,8 @@ import { Endpoints } from "../constants/endpoints";
 import { filesActions } from "../store/file-store";
 import { AppDispatch } from "../store/index";
 
+import { _getAllFiles } from "../pages/api/files";
+
 export const uploadFile = (file: File, next: any) => {
   const data = new FormData();
   data.append("file", file);
@@ -35,10 +37,10 @@ export const getFile = (id: String) => {
   };
 };
 
-export const getAllFiles = () => {
+export const getAllFiles = (userId: string = "1") => {
   return (dispatch: AppDispatch) => {
-    axios.get(Endpoints.getFiles).then((res: AxiosResponse) => {
-      dispatch(filesActions.setFiles(res.data));
+    _getAllFiles(userId).then((data) => {
+      dispatch(filesActions.setFiles(data));
     });
   };
 };

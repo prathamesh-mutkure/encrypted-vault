@@ -25,7 +25,7 @@ const Dashboard: React.FC<HomeProps> = () => {
   const [fileToRename, setFileToRename] = useState<any | null>(null);
 
   useEffect(() => {
-    // dispatch(getAllFiles());
+    dispatch(getAllFiles());
   }, [dispatch]);
 
   const onDeleteClick = (id: String) => {
@@ -71,11 +71,13 @@ const Dashboard: React.FC<HomeProps> = () => {
 
       <Container maxWidth="md" className={classes.HomeContainer}>
         <List>
-          {files.map((file: any) => {
+          {files.map((file: any, i: number) => {
             return (
               <FileListItem
-                filename={file.filename}
-                id={file._id}
+                key={i}
+                filename={file.name}
+                id={file.name}
+                url={file.url}
                 onDelete={onDeleteClick}
                 onRename={() => onRenameClick(file)}
               />

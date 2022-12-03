@@ -42,8 +42,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ error }) => {
 const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
 
-  console.log(session);
-
   if (!session) {
     return {
       redirect: {
