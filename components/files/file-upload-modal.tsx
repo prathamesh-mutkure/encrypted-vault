@@ -4,13 +4,16 @@ import { Modal, Button, Box, TextField, CircularProgress } from "@mui/material";
 import { uploadFile } from "../../helper/file-helpers";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/index";
+import { encryptMessage } from "../../helper/encryption-helpers";
 
 interface FileUploadModalProps {
+  userId: string;
   isOpen: boolean;
   handleClose: () => void;
 }
 
 const FileUploadModal: React.FC<FileUploadModalProps> = ({
+  userId,
   isOpen,
   handleClose,
 }) => {
@@ -23,7 +26,7 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
 
     setIsLoading(true);
     dispatch(
-      uploadFile("1", file, () => {
+      uploadFile(userId, file, () => {
         setFile(undefined);
         setIsLoading(false);
         handleClose();

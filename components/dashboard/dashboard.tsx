@@ -18,6 +18,7 @@ import FileUploadModal from "../files/file-upload-modal";
 import { AppDispatch, RootState } from "../../store";
 import Image from "next/image";
 import MasonryImage from "../files/files-masonry-item";
+import { User } from "../../models/user-model";
 
 /*
   TODO: 
@@ -27,9 +28,11 @@ import MasonryImage from "../files/files-masonry-item";
   4. LFX Mentorship
 */
 
-interface HomeProps {}
+interface DashboardProps {
+  user: User;
+}
 
-const Dashboard: React.FC<HomeProps> = () => {
+const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   const dispatch: AppDispatch = useDispatch();
   const files = useSelector((state: RootState) => state.files.files);
   const [isOpen, setIsOpen] = useState(false);
@@ -37,8 +40,8 @@ const Dashboard: React.FC<HomeProps> = () => {
   const [fileToRename, setFileToRename] = useState<any | null>(null);
 
   useEffect(() => {
-    dispatch(getAllFiles());
-  }, [dispatch]);
+    dispatch(getAllFiles(user.id));
+  }, [user.id, dispatch]);
 
   const onDeleteClick = (id: String) => {
     dispatch(deleteFile(id));
@@ -77,6 +80,7 @@ const Dashboard: React.FC<HomeProps> = () => {
       />
 
       <FileUploadModal
+        userId={user.id}
         isOpen={isUploadModalOpen}
         handleClose={closeUploadModal}
       />

@@ -17,7 +17,7 @@ export const getKeys = () => {
   return { publicKey, privateKey };
 };
 
-const encryptMessage = (message: string, publicKey: string) => {
+export const encryptMessage = (message: string, publicKey: string) => {
   // Encrypt the message using the public key
   const encrypted = crypto.publicEncrypt(
     {
@@ -30,7 +30,7 @@ const encryptMessage = (message: string, publicKey: string) => {
   return encrypted.toString();
 };
 
-const decryptMessage = (encrypted: string, privateKey: string) => {
+export const decryptMessage = (encrypted: string, privateKey: string) => {
   // Decrypt the message using the private key
   const decrypted = crypto.privateDecrypt(
     {

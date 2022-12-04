@@ -12,7 +12,7 @@ const HomePage = () => {
 const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
 
-  console.log(session);
+  // console.log(session);
 
   if (!session) {
     return {

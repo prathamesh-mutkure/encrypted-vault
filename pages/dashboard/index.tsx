@@ -16,8 +16,18 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ error }) => {
   const dispatch = useAppDispatch();
   const loadingBarRef: React.Ref<LoadingBarRef> = useRef(null);
 
+  const session = useSession();
+
+  useEffect(() => {
+    console.log("SESSION: ", session.data);
+  }, [session]);
+
   if (error) {
     return <p>{error}</p>;
+  }
+
+  if (session.status === "loading") {
+    return "Loading...";
   }
 
   return (
@@ -29,7 +39,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ error }) => {
 
       <DashboardNavBar />
 
-      <Dashboard />
+      <Dashboard user={session.data!.user} />
 
       {/* <NavBarDashboard loadingBarRef={loadingBarRef} />
       <Dashboard loadingBarRef={loadingBarRef} /> */}
