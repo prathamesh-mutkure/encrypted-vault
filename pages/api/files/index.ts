@@ -1,10 +1,31 @@
 import { initializeApp } from "firebase/app";
-import { getDownloadURL, getStorage, list, ref } from "firebase/storage";
+import {
+  getDownloadURL,
+  getStorage,
+  list,
+  ref,
+  uploadBytes,
+  UploadResult,
+} from "firebase/storage";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { firebaseConfig } from "../../../firebase-config";
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
+
+const _uploadFile = async (userId: string, file: File) => {
+  const userFolderRef = ref(storage, `${userId}/${file.name}`);
+
+  try {
+    const snapshot: UploadResult = await uploadBytes(userFolderRef, file);
+
+    return true;
+  } catch (e: any) {
+    console.log(e);
+
+    throw new Error(e?.message ?? "Failed to upload file");
+  }
+};
 
 const _getAllFiles = async (userId: string) => {
   const userFolderRef = ref(storage, userId);
@@ -34,4 +55,4 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default handler;
-export { _getAllFiles };
+export { _getAllFiles, _uploadFile };

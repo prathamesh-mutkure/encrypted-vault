@@ -23,7 +23,7 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
 
     setIsLoading(true);
     dispatch(
-      uploadFile(file, () => {
+      uploadFile("1", file, () => {
         setFile(undefined);
         setIsLoading(false);
         handleClose();
