@@ -1,4 +1,6 @@
-import { Container, IconButton, List } from "@mui/material";
+/* eslint-disable @next/next/no-img-element */
+import { Container, IconButton, List, Box } from "@mui/material";
+import Masonry from "@mui/lab/Masonry";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -14,6 +16,16 @@ import AddIcon from "@mui/icons-material/Add";
 import classes from "./home.module.scss";
 import FileUploadModal from "../files/file-upload-modal";
 import { AppDispatch, RootState } from "../../store";
+import Image from "next/image";
+import MasonryImage from "../files/files-masonry-item";
+
+/*
+  TODO: 
+  1. Add Mansorny to display images
+  2. Test if encrypted images show
+  3. Add Image upload code
+  4. LFX Mentorship
+*/
 
 interface HomeProps {}
 
@@ -69,21 +81,20 @@ const Dashboard: React.FC<HomeProps> = () => {
         handleClose={closeUploadModal}
       />
 
-      <Container maxWidth="md" className={classes.HomeContainer}>
-        <List>
-          {files.map((file: any, i: number) => {
-            return (
-              <FileListItem
+      <Container maxWidth="xl" className={classes.HomeContainer}>
+        <Box>
+          <Masonry columns={3} spacing={2}>
+            {files.map((file: any, i: number) => (
+              <MasonryImage
                 key={i}
                 filename={file.name}
-                id={file.name}
                 url={file.url}
                 onDelete={onDeleteClick}
                 onRename={() => onRenameClick(file)}
               />
-            );
-          })}
-        </List>
+            ))}
+          </Masonry>
+        </Box>
       </Container>
 
       <IconButton

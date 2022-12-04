@@ -33,8 +33,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ error }) => {
 
       {/* <NavBarDashboard loadingBarRef={loadingBarRef} />
       <Dashboard loadingBarRef={loadingBarRef} /> */}
-
-      <p>Dashboard...</p>
     </div>
   );
 };
