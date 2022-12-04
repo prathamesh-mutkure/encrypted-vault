@@ -80,12 +80,14 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       />
 
       <FileUploadModal
-        userId={user.id}
+        user={user}
         isOpen={isUploadModalOpen}
         handleClose={closeUploadModal}
       />
 
       <Container maxWidth="xl" className={classes.HomeContainer}>
+        <p>Private Key: {user.privateKey}</p>
+        <p>Public Key: {user.publicKey}</p>
         <Box>
           <Masonry columns={3} spacing={2}>
             {files.map((file: any, i: number) => (

@@ -27,7 +27,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ error }) => {
   }
 
   if (session.status === "loading") {
-    return "Loading...";
+    return <p>Loading...</p>;
   }
 
   return (

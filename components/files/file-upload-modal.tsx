@@ -5,15 +5,16 @@ import { uploadFile } from "../../helper/file-helpers";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/index";
 import { encryptMessage } from "../../helper/encryption-helpers";
+import { User } from "../../models/user-model";
 
 interface FileUploadModalProps {
-  userId: string;
+  user: User;
   isOpen: boolean;
   handleClose: () => void;
 }
 
 const FileUploadModal: React.FC<FileUploadModalProps> = ({
-  userId,
+  user,
   isOpen,
   handleClose,
 }) => {
@@ -26,7 +27,7 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
 
     setIsLoading(true);
     dispatch(
-      uploadFile(userId, file, () => {
+      uploadFile(user.id, file, () => {
         setFile(undefined);
         setIsLoading(false);
         handleClose();
