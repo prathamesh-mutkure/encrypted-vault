@@ -29,7 +29,7 @@ const _uploadFile = async (userId: string, file: File, key: string) => {
     const encryptedFile = encrypFile(Buffer.from(buffer), key);
 
     // console.log(key);
-    console.log("ENC FILE: ", encrypFile);
+    // console.log("ENC FILE: ", encrypFile);
 
     // return true;
 

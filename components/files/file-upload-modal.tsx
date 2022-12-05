@@ -26,6 +26,7 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
     if (!file) return;
 
     setIsLoading(true);
+
     dispatch(
       uploadFile(user.id, file, "key", () => {
         setFile(undefined);

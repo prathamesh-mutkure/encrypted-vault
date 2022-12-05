@@ -5,8 +5,8 @@ import React from "react";
 interface MasonryImageProps {
   filename: string;
   url: string;
-  onDelete: (id: String) => void;
-  onRename: (id: String) => void;
+  onDownload: () => void;
+  onDecrypt: () => void;
 }
 
 const Label = styled(Paper)(({ theme }) => ({
@@ -23,8 +23,8 @@ const Label = styled(Paper)(({ theme }) => ({
 const MasonryImage: React.FC<MasonryImageProps> = ({
   filename,
   url,
-  onDelete,
-  onRename,
+  onDownload,
+  onDecrypt,
 }) => {
   return (
     <div
@@ -49,10 +49,16 @@ const MasonryImage: React.FC<MasonryImageProps> = ({
         />
         <Label>{filename}</Label>
         <Stack direction="row" spacing={5} justifyContent="center">
-          <Button variant="contained" size="small">
-            Download
-          </Button>
-          <Button variant="contained" size="small">
+          <a href={url} target="_blank" rel="noreferrer">
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => onDownload()}
+            >
+              Download
+            </Button>
+          </a>
+          <Button variant="contained" size="small" onClick={() => onDecrypt()}>
             Decrypt
           </Button>
         </Stack>

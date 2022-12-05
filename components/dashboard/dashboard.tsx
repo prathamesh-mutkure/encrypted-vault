@@ -19,6 +19,23 @@ import { AppDispatch, RootState } from "../../store";
 import Image from "next/image";
 import MasonryImage from "../files/files-masonry-item";
 import { User } from "../../models/user-model";
+import { useRouter } from "next/router";
+import { decryptFile } from "../../helper/encryption-helpers";
+import * as crypto from "crypto";
+import {
+  getDownloadURL,
+  getStorage,
+  list,
+  ref,
+  uploadBytes,
+  UploadResult,
+  getBlob,
+} from "firebase/storage";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../../firebase-config";
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 
 /*
   TODO: 
@@ -33,6 +50,7 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   const dispatch: AppDispatch = useDispatch();
+  const router = useRouter();
   const files = useSelector((state: RootState) => state.files.files);
   const [isOpen, setIsOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
@@ -42,13 +60,35 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
     dispatch(getAllFiles(user.id));
   }, [user.id, dispatch]);
 
-  const onDeleteClick = (id: String) => {
-    dispatch(deleteFile(id));
-  };
+  const onDownload = (file: any) => {};
 
-  const onRenameClick = (file: any) => {
-    setFileToRename(file);
-    setIsOpen(true);
+  const onDecrypt = async (file: any) => {
+    // setFileToRename(file);
+    // setIsOpen(true);
+
+    console.log(file);
+
+    const fileRef = ref(storage, file.fullPath);
+
+    let key = "key";
+    key = crypto
+      .createHash("sha256")
+      .update(String(key))
+      .digest("base64")
+      .substr(0, 32);
+
+    getBlob(fileRef)
+      .then(async (blob) => {
+        const arrayBuffer = await blob.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const decrypted = decryptFile(buffer, key);
+
+        const x = new Blob([decrypted.buffer]);
+        const url = URL.createObjectURL(x);
+
+        console.log(url);
+      })
+      .catch((e) => console.error("Error decrypting: ", e));
   };
 
   const onUploadClick = (file: any) => {
@@ -92,8 +132,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 key={i}
                 filename={file.name}
                 url={file.url}
-                onDelete={onDeleteClick}
-                onRename={() => onRenameClick(file)}
+                onDownload={() => onDownload(file)}
+                onDecrypt={() => onDecrypt(file)}
               />
             ))}
           </Masonry>
