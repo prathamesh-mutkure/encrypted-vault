@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Paper, styled } from "@mui/material";
+import { Button, Paper, Stack, styled } from "@mui/material";
 import React from "react";
 
 interface MasonryImageProps {
@@ -17,6 +17,7 @@ const Label = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
   borderTopLeftRadius: 0,
   borderTopRightRadius: 0,
+  borderRadius: 1,
 }));
 
 const MasonryImage: React.FC<MasonryImageProps> = ({
@@ -26,22 +27,36 @@ const MasonryImage: React.FC<MasonryImageProps> = ({
   onRename,
 }) => {
   return (
-    <div>
-      <img
-        src={url}
-        // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
-        alt={filename}
-        loading="lazy"
-        style={{
-          borderTopLeftRadius: 4,
-          borderTopRightRadius: 4,
-          display: "block",
-          width: "100%",
-          // maxWidth: "25%",
-          height: "auto",
-        }}
-      />
-      <Label>{filename}</Label>
+    <div
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.04)",
+        padding: "1rem",
+        borderRadius: "4px",
+      }}
+    >
+      <Stack direction="column" spacing={1}>
+        <img
+          src={url}
+          // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
+          alt={filename}
+          loading="lazy"
+          style={{
+            borderRadius: 4,
+            display: "block",
+            width: "100%",
+            height: "auto",
+          }}
+        />
+        <Label>{filename}</Label>
+        <Stack direction="row" spacing={5} justifyContent="center">
+          <Button variant="contained" size="small">
+            Download
+          </Button>
+          <Button variant="contained" size="small">
+            Decrypt
+          </Button>
+        </Stack>
+      </Stack>
     </div>
   );
 };
