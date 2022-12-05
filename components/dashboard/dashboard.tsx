@@ -22,7 +22,6 @@ import { User } from "../../models/user-model";
 
 /*
   TODO: 
-  1. Add Mansorny to display images
   2. Test if encrypted images show
   3. Add Image upload code
   4. LFX Mentorship
