@@ -56,3 +56,32 @@ export const decryptMessage = (encrypted: string, privateKey: string) => {
 
   return decrypted;
 };
+
+export const encrypFile = (buffer: Buffer, key: string) => {
+  // Create an initialization vector
+  const iv = crypto.randomBytes(16);
+
+  // Create a new cipher using the algorithm, key, and iv
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
+
+  // Create the new (encrypted) buffer
+  const result = Buffer.concat([iv, cipher.update(buffer), cipher.final()]);
+
+  return result;
+};
+
+export const decryptFile = (encrypted: Buffer, privateKey: string) => {
+  // Get the iv: the first 16 bytes
+  const iv = encrypted.slice(0, 16);
+
+  // Get the rest
+  encrypted = encrypted.slice(16);
+
+  // Create a decipher
+  const decipher = crypto.createDecipheriv(algorithm, privateKey, iv);
+
+  // Actually decrypt it
+  const result = Buffer.concat([decipher.update(encrypted), decipher.final()]);
+
+  return result;
+};
