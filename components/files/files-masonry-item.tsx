@@ -15,9 +15,9 @@ const Label = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(0.5),
   textAlign: "center",
   color: theme.palette.text.secondary,
-  borderTopLeftRadius: 0,
-  borderTopRightRadius: 0,
-  borderRadius: 1,
+  borderRadius: 3,
+  boxShadow: "none",
+  border: "solid 1px #F5F5F5",
 }));
 
 const MasonryImage: React.FC<MasonryImageProps> = ({

@@ -85,8 +85,6 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       />
 
       <Container maxWidth="xl" className={classes.HomeContainer}>
-        <p>Private Key: {user.privateKey}</p>
-        <p>Public Key: {user.publicKey}</p>
         <Box>
           <Masonry columns={3} spacing={2}>
             {files.map((file: any, i: number) => (
@@ -100,6 +98,9 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
             ))}
           </Masonry>
         </Box>
+
+        <p>Private Key: {user.privateKey}</p>
+        <p>Public Key: {user.publicKey}</p>
       </Container>
 
       <IconButton
