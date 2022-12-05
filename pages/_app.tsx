@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Head>
-            <title>Anti-Cheat Exam App</title>
+            <title>Secret Vault</title>
             <meta name="author" content="Prathamesh Mutkure" />
           </Head>
           <Component {...pageProps} />
