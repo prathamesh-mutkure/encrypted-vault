@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { Modal, Button, Box, TextField } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/index.store";
-import { renameFile } from "../../store/filesAction";
 
 interface FileRenameModalProps {
   isOpen: boolean;

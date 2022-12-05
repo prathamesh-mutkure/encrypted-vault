@@ -5,9 +5,14 @@ import { AppDispatch } from "../store/index";
 
 import { _getAllFiles, _uploadFile } from "../pages/api/files";
 
-export const uploadFile = (userId: string, file: File, next: any) => {
+export const uploadFile = (
+  userId: string,
+  file: File,
+  key = "key",
+  next: any
+) => {
   return (dispatch: AppDispatch) => {
-    _uploadFile(userId, file).then((data) => {
+    _uploadFile(userId, file, key).then((data) => {
       dispatch(getAllFiles());
       next && next();
     });

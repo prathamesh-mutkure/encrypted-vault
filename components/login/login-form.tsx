@@ -61,7 +61,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ loadingBarRef }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (loading || idError !== "" || passwordError != "") {
